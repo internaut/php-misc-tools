@@ -1,5 +1,5 @@
 <?php
-/**************** FUNCTIONS THAT WORK ON OBJECTS ****************************************/
+/**************** FUNCTIONS THAT WORK ON OBJECTS AND ARRAYS *****************************/
 
 /**
  * Merge two simple objects $a and $b recursively. Values in $b will override the ones in $a.
@@ -48,25 +48,6 @@ function mergeObjects($a, $b) {
     }
 
     return $o;
-}
-
-/**
- * Delete all keys (in-place) in array $keys in object or array $x.
- *
- * @param $x array or object to delete keys in
- * @param $keys array with keys to delete
- */
-function delKeys($x, $keys) {
-    assert(is_object($x) || is_array($x));
-    $isObj = is_object($x);
-
-    foreach ($keys as $k) {
-        if ($isObj) {
-            unset($x->$k);
-        } else {
-            unset($x[$k]);
-        }
-    }
 }
 
 /**
@@ -134,7 +115,24 @@ function hasAttr($obj, $attr) {
     }
 }
 
-/**************** FUNCTIONS THAT WORK ON ARRAYS *****************************************/
+/**
+ * Delete all keys (in-place) in array $keys in object or array $x.
+ *
+ * @param $x array or object to delete keys in
+ * @param $keys array with keys to delete
+ */
+function delKeys($x, $keys) {
+    assert(is_object($x) || is_array($x));
+    $isObj = is_object($x);
+
+    foreach ($keys as $k) {
+        if ($isObj) {
+            unset($x->$k);
+        } else {
+            unset($x[$k]);
+        }
+    }
+}
 
 /**
  * Create intersection of all arrays in $arrays using array_intersection() function.
